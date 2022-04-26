@@ -1,9 +1,9 @@
 import React from "react";
 
-const Current = () => {
+const Current = ({ coordinates, location }) => {
   return (
     <div className="current">
-      <h2 className="location">Location</h2>
+      <h2 className="location">{location}</h2>
       <p>Day | Date </p>
       <p className="temperature">23C</p>
       <p>Sunny</p>
