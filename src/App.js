@@ -3,8 +3,8 @@ import Forecast from "./components/Forecast";
 import Current from "./components/Current";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
-// import axios from "axios";
-// const apiKey = process.env.REACT_APP_API_KEY;
+import axios from "axios";
+const apiKey = process.env.REACT_APP_API_KEY;
 
 const App = () => {
   const [coordinates, setCoordinates] = useState({
@@ -13,17 +13,21 @@ const App = () => {
     errorMessage: "",
   });
 
+  const [weatherData, setWeatherData] = useState({});
+
   useEffect(() => {
+    // FUNCTION DEFINITIONS //
+
     const getCoordinates = () => {
       navigator.geolocation.getCurrentPosition(
-        //Success
+        // On Success
         (position) => {
           setCoordinates({
             lat: position.coords.latitude,
             lon: position.coords.longitude,
           });
         },
-        //Error
+        // On Error
         (error) => {
           setCoordinates({
             errorMessage:
@@ -34,6 +38,7 @@ const App = () => {
       );
     };
 
+    // FUNCTION EXECUTION
     if (navigator.geolocation) {
       getCoordinates();
     } else {
@@ -41,13 +46,33 @@ const App = () => {
     }
   }, []);
 
-  return (
-    <div>
-      <Header />
-      <Current coordinates={coordinates} />
-      <Forecast />
-    </div>
-  );
+  useEffect(() => {
+    const getWeatherData = (lat, lon, units, apiKey) => {
+      try {
+        const API_URL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=${units}&exclude=minutely,alerts&appid=${apiKey}`;
+        axios.get(API_URL).then((res) => {
+          setWeatherData(res.data);
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    if (coordinates) {
+      getWeatherData(coordinates.lat, coordinates.lon, "metric", apiKey);
+    }
+  }, [coordinates]);
+  console.log(weatherData.current);
+
+  if (weatherData) {
+    return (
+      <div>
+        <Header />
+        <Current coordinates={coordinates} current={weatherData.current} />
+        <Forecast />
+      </div>
+    );
+  }
 };
 
 export default App;
