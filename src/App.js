@@ -63,13 +63,14 @@ const App = () => {
     }
   }, [coordinates]);
   console.log(weatherData.current);
+  console.log(weatherData.hourly);
 
-  if (weatherData) {
+  if (coordinates && weatherData && weatherData.hourly && weatherData.daily) {
     return (
       <div>
         <Header />
         <Current coordinates={coordinates} current={weatherData.current} />
-        <Forecast />
+        <Forecast hourly={weatherData.hourly} daily={weatherData.daily} />
       </div>
     );
   }
