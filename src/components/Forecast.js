@@ -1,15 +1,29 @@
 import React from "react";
+import { formatDate, toDate } from "../helpers/helpers";
 
-const Forecast = () => {
+const Forecast = ({ hourly, daily }) => {
   return (
     <div className="forecast">
       <p>Forecast</p>
       <div className="overview">
-        <div className="overview-card">Mon.</div>
-        <div className="overview-card">Tue.</div>
-        <div className="overview-card">wed.</div>
-        <div className="overview-card">Thu.</div>
-        <div className="overview-card">Fri.</div>
+        {daily.map((day) => {
+          return (
+            <div className="overview-card">
+              <p>{formatDate(day.dt, "short")}</p>
+              <img
+                src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                alt={day.weather[0].description}
+              />
+              <p>
+                {Math.round(day.temp.max) +
+                  `\u00b0` +
+                  `/` +
+                  Math.round(day.temp.min) +
+                  `\u00b0`}
+              </p>
+            </div>
+          );
+        })}
       </div>
       <p>Detail</p>
       <div className="detail">
@@ -20,28 +34,22 @@ const Forecast = () => {
                 <th scope="col">Time</th>
                 <th scope="col">Temp</th>
                 <th scope="col">Wind</th>
-                <th scope="col">Prec.</th>
+                <th scope="col">Hum.</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>12</td>
-                <td>15</td>
-                <td>4</td>
-                <td>0mm</td>
-              </tr>
-              <tr>
-                <td>13</td>
-                <td>15</td>
-                <td>3</td>
-                <td>0mm</td>
-              </tr>
-              <tr>
-                <td>14</td>
-                <td>17</td>
-                <td>2</td>
-                <td>0mm</td>
-              </tr>
+              {hourly
+                .map((hour) => {
+                  return (
+                    <tr>
+                      <td>{toDate(hour.dt)}</td>
+                      <td>{Math.round(hour.temp) + `\u00b0`}</td>
+                      <td>{hour.wind_speed.toFixed(1)} m/s</td>
+                      <td>{hour.humidity + `\u0025`}</td>
+                    </tr>
+                  );
+                })
+                .slice(0, 24)}
             </tbody>
           </table>
         </div>
