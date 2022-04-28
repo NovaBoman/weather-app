@@ -14,6 +14,7 @@ const App = () => {
   });
 
   const [weatherData, setWeatherData] = useState({});
+  const [units, setUnits] = useState("metric");
 
   useEffect(() => {
     // FUNCTION DEFINITIONS //
@@ -59,18 +60,32 @@ const App = () => {
     };
 
     if (coordinates) {
-      getWeatherData(coordinates.lat, coordinates.lon, "metric", apiKey);
+      getWeatherData(coordinates.lat, coordinates.lon, units, apiKey);
     }
-  }, [coordinates]);
+  }, [coordinates, units]);
   console.log(weatherData.current);
   console.log(weatherData.hourly);
 
-  if (coordinates && weatherData && weatherData.hourly && weatherData.daily) {
+  if (
+    coordinates &&
+    weatherData &&
+    weatherData.hourly &&
+    weatherData.daily &&
+    units
+  ) {
     return (
       <div>
         <Header />
-        <Current coordinates={coordinates} current={weatherData.current} />
-        <Forecast hourly={weatherData.hourly} daily={weatherData.daily} />
+        <Current
+          coordinates={coordinates}
+          current={weatherData.current}
+          units={units}
+        />
+        <Forecast
+          hourly={weatherData.hourly}
+          daily={weatherData.daily}
+          units={units}
+        />
       </div>
     );
   }
