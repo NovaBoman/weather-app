@@ -1,7 +1,6 @@
 import "./App.css";
 import Forecast from "./components/Forecast";
 import Current from "./components/Current";
-import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
 const apiKey = process.env.REACT_APP_API_KEY;
@@ -63,6 +62,11 @@ const App = () => {
       getWeatherData(coordinates.lat, coordinates.lon, units, apiKey);
     }
   }, [coordinates, units]);
+
+  const toggleUnits = () => {
+    setUnits(units === "metric" ? "imperial" : "metric");
+  };
+
   console.log(weatherData.current);
   console.log(weatherData.hourly);
 
@@ -75,7 +79,19 @@ const App = () => {
   ) {
     return (
       <div>
-        <Header />
+        <div className="header">
+          <p>Current</p>
+          <div className="settings">
+            <button
+              className="toggle-units"
+              value="metric"
+              onClick={toggleUnits}
+            >
+              {`\u00b0`}C / {`\u00b0`}F
+            </button>
+          </div>
+        </div>
+
         <Current
           coordinates={coordinates}
           current={weatherData.current}

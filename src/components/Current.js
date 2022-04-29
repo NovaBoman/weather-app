@@ -2,12 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { formatDate, toDate } from "../helpers/helpers";
 
-const Current = ({ coordinates, current }) => {
+const Current = ({ coordinates, current, units }) => {
   const [location, setLocation] = useState("");
+
   useEffect(() => {
     axios({
       // Endpoint to get data
-      url: `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coordinates.lat}&longitude=${coordinates.lon}&localityLanguage=sv`,
+      url: `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coordinates.lat}&longitude=${coordinates.lon}`,
       method: "GET",
     }).then((res) => {
       //If city property is empty use other location properties
@@ -25,7 +26,11 @@ const Current = ({ coordinates, current }) => {
         <h2 className="location">{location}</h2>
 
         <p>{formatDate(current.dt)}</p>
-        <p className="temperature">{Math.round(current.temp) + `\u00b0`}</p>
+        <p className="temperature">
+          {Math.round(current.temp) +
+            `\u00b0` +
+            (units === "metric" ? "C" : "F")}
+        </p>
         <p>(feels like {Math.round(current.feels_like) + `\u00b0`})</p>
         <p>{current.weather[0].main}</p>
         <div className="short-info">
