@@ -1,11 +1,3 @@
-// Converts UNIX timestamp to Date
-export const toDate = (timestamp) => {
-  const ms = timestamp * 1000;
-  const dateObject = new Date(ms);
-  const date = dateObject.toLocaleString();
-  return date;
-};
-
 // Format date
 export const formatDate = (timestamp, option = "long") => {
   const date = toDateObject(timestamp);
@@ -21,4 +13,15 @@ export const toDateObject = (timestamp) => {
   const ms = timestamp * 1000;
   const dateObject = new Date(ms);
   return dateObject;
+};
+
+// Get Hours
+
+export const toHours = (timestamp) => {
+  const date = toDateObject(timestamp);
+  const time = date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return time;
 };
