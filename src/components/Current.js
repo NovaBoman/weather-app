@@ -49,9 +49,12 @@ const Current = ({ coordinates, current, units }) => {
     );
   } else {
     return (
-      <h2 className="location">
-        {coordinates.errorMessage ? coordinates.errorMessage : location}
-      </h2>
+      <div className="current">
+        <h2 className="location">
+          {coordinates.errorMessage ? coordinates.errorMessage : location}
+        </h2>
+        <p>No weather data for your location</p>
+      </div>
     );
   }
 };
