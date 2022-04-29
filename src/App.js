@@ -104,6 +104,12 @@ const App = () => {
         />
       </div>
     );
+  } else {
+    return (
+      <div>
+        <Current coordinates={coordinates} />;
+      </div>
+    );
   }
 };
 
