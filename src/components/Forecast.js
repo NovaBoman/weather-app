@@ -1,5 +1,6 @@
 import React from "react";
-import { formatDate, toDate } from "../helpers/helpers";
+import { formatDate, toHours } from "../helpers/helpers";
+import "../components/Forecast.css";
 
 const Forecast = ({ hourly, daily }) => {
   return (
@@ -32,6 +33,7 @@ const Forecast = ({ hourly, daily }) => {
             <thead>
               <tr>
                 <th scope="col">Time</th>
+                <th scope="col">Weather</th>
                 <th scope="col">Temp</th>
                 <th scope="col">Wind</th>
                 <th scope="col">Hum.</th>
@@ -42,7 +44,13 @@ const Forecast = ({ hourly, daily }) => {
                 .map((hour) => {
                   return (
                     <tr>
-                      <td>{toDate(hour.dt)}</td>
+                      <td>{toHours(hour.dt)}</td>
+                      <td>
+                        <img
+                          src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`}
+                          alt={hour.weather[0].description}
+                        />
+                      </td>
                       <td>{Math.round(hour.temp) + `\u00b0`}</td>
                       <td>{hour.wind_speed.toFixed(1)} m/s</td>
                       <td>{hour.humidity + `\u0025`}</td>

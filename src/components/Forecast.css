@@ -1,0 +1,71 @@
+.forecast {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid rgb(164, 61, 224);
+}
+
+.overview {
+  flex: 1 1;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid rgb(61, 224, 69);
+}
+.detail {
+  flex: 2;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid rgb(61, 99, 224);
+}
+
+.forecast-selections {
+  display: flex;
+  padding: 0.5vw;
+}
+.forecast-selections p {
+  margin: 0.5vw;
+}
+.forecast-type-btn {
+  width: 30%;
+}
+
+.overview {
+  display: flex;
+  overflow: scroll;
+}
+
+.overview-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(228, 107, 191);
+  flex: 1;
+  text-align: center;
+}
+
+.hourly {
+  display: grid;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  display: flex;
+}
+th {
+  flex: 1;
+  padding: 1vw 0;
+}
+td {
+  flex: 1;
+  padding: 1vw 0;
+  text-align: center;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+}
+
+td img {
+  width: 50%;
+}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { formatDate, toDate } from "../helpers/helpers";
+import { formatDate, toHours } from "../helpers/helpers";
+import "../components/Current.css";
 
 const Current = ({ coordinates, current, units }) => {
   const [location, setLocation] = useState("");
@@ -32,7 +33,7 @@ const Current = ({ coordinates, current, units }) => {
             (units === "metric" ? "C" : "F")}
         </p>
         <p>(feels like {Math.round(current.feels_like) + `\u00b0`})</p>
-        <p>{current.weather[0].main}</p>
+        <p>{current.weather[0].description}</p>
         <div className="short-info">
           <p>{current.wind_speed.toFixed(1)} m/s</p>
           <img
@@ -42,8 +43,8 @@ const Current = ({ coordinates, current, units }) => {
           <p>{current.humidity + `\u0025`}</p>
         </div>
         <div className="sun">
-          <p>{toDate(current.sunrise)}</p>
-          <p>{toDate(current.sunset)}</p>
+          <p>{toHours(current.sunrise)}</p>
+          <p>{toHours(current.sunset)}</p>
         </div>
       </div>
     );
