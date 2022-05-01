@@ -35,7 +35,10 @@ const Current = ({ coordinates, current, units }) => {
         <p>(feels like {Math.round(current.feels_like) + `\u00b0`})</p>
         <p>{current.weather[0].description}</p>
         <div className="short-info">
-          <p>{current.wind_speed.toFixed(1)} m/s</p>
+          <p>
+            {current.wind_speed.toFixed(1) +
+              (units === "metric" ? "m/s" : "mph")}
+          </p>
           <img
             src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
             alt={current.weather[0].description}
