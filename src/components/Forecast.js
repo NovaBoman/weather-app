@@ -1,10 +1,11 @@
 import React from "react";
 import { formatDate, toHours } from "../helpers/helpers";
 import "../components/Forecast.css";
+import "../App.css";
 
 const Forecast = ({ hourly, daily, units }) => {
   return (
-    <div className="forecast">
+    <div className="forecast container">
       <h2>7 day forecast</h2>
       <div className="overview">
         {daily
@@ -46,7 +47,7 @@ const Forecast = ({ hourly, daily, units }) => {
                 .map((hour) => {
                   return (
                     <tr>
-                      <td>{toHours(hour.dt)}</td>
+                      <td>{toHours(hour.dt, "short")}</td>
                       <td>
                         <img
                           src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`}

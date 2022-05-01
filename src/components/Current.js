@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { formatDate, toHours } from "../helpers/helpers";
 import "../components/Current.css";
+import "../App.css";
 
 const Current = ({ coordinates, current, units }) => {
   const [location, setLocation] = useState("");
@@ -23,7 +24,7 @@ const Current = ({ coordinates, current, units }) => {
 
   if (location && current) {
     return (
-      <div className="current">
+      <div className="current container">
         <h2 className="location">{location}</h2>
 
         <p>{formatDate(current.dt)}</p>
@@ -36,6 +37,7 @@ const Current = ({ coordinates, current, units }) => {
         <p>{current.weather[0].description}</p>
         <div className="short-info">
           <p>
+            Wind<br></br>
             {current.wind_speed.toFixed(1) +
               (units === "metric" ? "m/s" : "mph")}
           </p>
@@ -43,11 +45,20 @@ const Current = ({ coordinates, current, units }) => {
             src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
             alt={current.weather[0].description}
           />
-          <p>{current.humidity + `\u0025`}</p>
+          <p>
+            Humidity<br></br>
+            {current.humidity + `\u0025`}
+          </p>
         </div>
         <div className="sun">
-          <p>{toHours(current.sunrise)}</p>
-          <p>{toHours(current.sunset)}</p>
+          <p>
+            Sunrise<br></br>
+            {toHours(current.sunrise)}
+          </p>
+          <p>
+            Sunset<br></br>
+            {toHours(current.sunset)}
+          </p>
         </div>
       </div>
     );

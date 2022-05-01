@@ -3,20 +3,17 @@
   flex-direction: column;
   max-width: 500px;
   margin: 0 auto;
-  border: 1px solid rgb(164, 61, 224);
 }
 
 .overview {
   flex: 1 1;
   width: 100%;
   margin: 0 auto;
-  border: 1px solid rgb(61, 224, 69);
 }
 .detail {
   flex: 2;
   width: 100%;
   margin: 0 auto;
-  border: 1px solid rgb(61, 99, 224);
 }
 
 .forecast-selections {
@@ -32,13 +29,12 @@
 
 .overview {
   display: flex;
-  overflow: scroll;
+  overflow-x: scroll;
 }
 
 .overview-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgb(228, 107, 191);
   flex: 1;
   text-align: center;
 }
@@ -53,17 +49,18 @@ table {
 
 tr {
   display: flex;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  align-items: center;
 }
 th {
   flex: 1;
-  padding: 1vw 0;
+  padding: 1rem 0;
 }
 td {
   flex: 1;
   padding: 1vw 0;
   text-align: center;
-  border-top: 1px solid #999;
-  border-bottom: 1px solid #999;
 }
 
 td img {
