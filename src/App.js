@@ -79,17 +79,11 @@ const App = () => {
   ) {
     return (
       <div>
-        <div className="header">
-          <p>Current</p>
-          <div className="settings">
-            <button
-              className="toggle-units"
-              value="metric"
-              onClick={toggleUnits}
-            >
-              {`\u00b0`}C / {`\u00b0`}F
-            </button>
-          </div>
+        <div className="header container">
+          <h1>Current weather</h1>
+          <button className="toggle-units" value="metric" onClick={toggleUnits}>
+            {`\u00b0`}C / {`\u00b0`}F
+          </button>
         </div>
 
         <Current
