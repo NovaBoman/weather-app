@@ -23,7 +23,6 @@ export const toDateObject = (timestamp) => {
 };
 
 // Get Hours
-
 export const toHours = (timestamp, option = "long") => {
   const date = toDateObject(timestamp);
 

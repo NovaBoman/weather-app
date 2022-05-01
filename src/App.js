@@ -16,8 +16,6 @@ const App = () => {
   const [units, setUnits] = useState("metric");
 
   useEffect(() => {
-    // FUNCTION DEFINITIONS //
-
     const getCoordinates = () => {
       navigator.geolocation.getCurrentPosition(
         // On Success
@@ -38,7 +36,6 @@ const App = () => {
       );
     };
 
-    // FUNCTION EXECUTION
     if (navigator.geolocation) {
       getCoordinates();
     } else {
