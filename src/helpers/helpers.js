@@ -1,6 +1,13 @@
 // Format date
 export const formatDate = (timestamp, option = "long") => {
   const date = toDateObject(timestamp);
+
+  if (option === "short") {
+    return date.toLocaleDateString("en-GB", {
+      weekday: option,
+    });
+  }
+
   return date.toLocaleDateString("en-GB", {
     weekday: option,
     month: option,
@@ -17,11 +24,17 @@ export const toDateObject = (timestamp) => {
 
 // Get Hours
 
-export const toHours = (timestamp) => {
+export const toHours = (timestamp, option = "long") => {
   const date = toDateObject(timestamp);
-  const time = date.toLocaleTimeString([], {
+
+  if (option === "short") {
+    return date.toLocaleTimeString([], {
+      hour: "2-digit",
+    });
+  }
+
+  return date.toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
-  return time;
 };
